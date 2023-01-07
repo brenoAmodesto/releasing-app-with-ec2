@@ -1,0 +1,5 @@
+- name: Docker installing
+  become: yes
+  hosts: tag_Name_br
+  roles: 
+  -   todo

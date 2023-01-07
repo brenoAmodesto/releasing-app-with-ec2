@@ -1,0 +1,6 @@
+brkey
+brkey.pub
+terraform.tfstate
+.terraform.lock.hcl
+terraform.tfstate.backup
+.terraform/providers/registry.terraform.io/hashicorp/aws/4.49.0/linux_amd64/terraform-provider-aws_v4.49.0_x5

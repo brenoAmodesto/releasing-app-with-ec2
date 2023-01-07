@@ -1,0 +1,43 @@
+#- name: git clone
+#  shell: |
+#    git clone https://github.com/yeshwanthlm/django-on-ec2.git
+
+- name: update && upgrade
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install django
+  ansible.builtin.apt:
+    name: python3-pip
+    state: present
+
+- name: Install pip
+  shell: |
+    pip install django
+
+- name: exporting variables
+  shell: |
+    export DJANGO_SUPERUSER_EMAIL=email@email.com  \ 
+    export DJANGO_SUPERUSER_USERNAME=admin  \
+    export DJANGO_SUPERUSER_PASSWORD=admin  \
+
+- name: makemigrations 
+  shell: |
+    cd django-on-ec2
+    python3 manage.py makemigrations 
+   
+- name: migrate
+  shell: |
+    cd django-on-ec2
+    python3 manage.py migrate
+
+- name: create superuser
+  shell: |
+    cd django-on-ec2
+   python3 manage.py createsuperuser --noinput
+
+- name: runserver
+  shell: |
+    cd django-on-ec2
+    python3 manage.py runserver 0.0.0.0:8000
